@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h2>Latest products</h2>
+      <h1>Latest products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
