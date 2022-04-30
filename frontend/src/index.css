@@ -27,3 +27,7 @@ h3 {
 .rating span {
   margin: 0.1rem;
 }
+
+.link-rrd {
+  text-decoration: none;
+}

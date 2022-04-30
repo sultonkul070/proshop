@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   Link,
   useNavigate,
   useParams,
   useSearchParams,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
-import { addToCart, removeFromCart } from "../actions/cartActions";
+} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import {
   Button,
   Card,
@@ -16,7 +16,7 @@ import {
   Image,
   ListGroup,
   Row,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const CartScreen = () => {
 
   const [searchParams] = useSearchParams();
 
-  const qty = +searchParams.get("qty");
+  const qty = +searchParams.get('qty');
 
   const dispatch = useDispatch();
 
@@ -42,8 +42,7 @@ const CartScreen = () => {
   };
 
   const checkoutHandler = () => {
-    console.log("checkout");
-    navigate("/login?redirect=shipping");
+    navigate('/login?redirect=/shipping');
   };
 
   return (
@@ -52,8 +51,8 @@ const CartScreen = () => {
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty{" "}
-            <Link to='/' style={{ textDecoration: "none" }}>
+            Your cart is empty{' '}
+            <Link to='/' className='link-rrd'>
               Go Back
             </Link>
           </Message>
@@ -66,10 +65,7 @@ const CartScreen = () => {
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
-                    <Link
-                      to={`/product/${item.product}`}
-                      style={{ textDecoration: "none" }}
-                    >
+                    <Link to={`/product/${item.product}`} className='link-rrd'>
                       {item.name}
                     </Link>
                   </Col>

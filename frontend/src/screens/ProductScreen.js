@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Card,
@@ -8,12 +8,12 @@ import {
   Image,
   ListGroup,
   Row,
-} from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Rating from "../components/Rating";
-import { listProductDetails } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+} from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import Rating from '../components/Rating';
+import { listProductDetails } from '../actions/productActions';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
@@ -36,7 +36,7 @@ const ProductScreen = () => {
 
   return (
     <>
-      <Link className='btn btn-light' to='/'>
+      <Link className='btn btn-light link-rrd' to='/'>
         Go back
       </Link>
 
@@ -82,7 +82,7 @@ const ProductScreen = () => {
                   <Row>
                     <Col>Status:</Col>
                     <Col>
-                      {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                      {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
                     </Col>
                   </Row>
                 </ListGroup.Item>
