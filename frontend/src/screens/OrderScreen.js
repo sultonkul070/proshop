@@ -1,17 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Button, Card, Col, Image, ListGroup, Row } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getOrderDetails } from '../actions/orderActions';
+import { deliverOrder, getOrderDetails } from '../actions/orderActions';
+import { ORDER_DELIVER_RESET } from '../constants/orderConstants';
 
 const OrderScreen = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id: orderId } = useParams();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   if (!loading) {
     // Calculate prices
@@ -25,9 +33,20 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(id));
-    // eslint-disable-next-line
-  }, []);
+    if (!userInfo) {
+      navigate('/login');
+    }
+
+    if (!order || successDeliver) {
+      dispatch({ type: ORDER_DELIVER_RESET });
+
+      dispatch(getOrderDetails(orderId));
+    }
+  }, [dispatch, orderId, order, successDeliver, userInfo, navigate]);
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  };
 
   return loading ? (
     <Loader />
@@ -143,6 +162,21 @@ const OrderScreen = () => {
                   <Col>{order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type='button'
+                      className='btn btn-block w-100'
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

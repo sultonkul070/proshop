@@ -13,6 +13,11 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import OrderListScreen from './screens/OrderListScreen';
 
 const App = () => {
   return (
@@ -22,9 +27,22 @@ const App = () => {
         <Container>
           <Routes>
             <Route path='/login' element={<LoginScreen />}></Route>
+            <Route path='/' exact element={<HomeScreen />}></Route>
             <Route path='/register' element={<RegisterScreen />}></Route>
             <Route path='/profile' element={<ProfileScreen />}></Route>
-            <Route path='/' exact element={<HomeScreen />}></Route>
+            <Route path='/admin/userlist' element={<UserListScreen />}></Route>
+            <Route
+              path='/admin/productlist'
+              element={<ProductListScreen />}
+            ></Route>
+            <Route
+              path='/admin/user/:id/edit'
+              element={<UserEditScreen />}
+            ></Route>
+            <Route
+              path='/admin/product/:id/edit'
+              element={<ProductEditScreen />}
+            ></Route>
             <Route path='/products/:id' element={<ProductScreen />}></Route>
             <Route path='/cart/:id' element={<CartScreen />}></Route>
             <Route path='/cart' element={<CartScreen />}></Route>
@@ -32,6 +50,10 @@ const App = () => {
             <Route path='/payment' element={<PaymentScreen />}></Route>
             <Route path='/placeorder' element={<PlaceOrderScreen />}></Route>
             <Route path='/order/:id' element={<OrderScreen />}></Route>
+            <Route
+              path='/admin/orderlist'
+              element={<OrderListScreen />}
+            ></Route>
           </Routes>
         </Container>
       </main>
